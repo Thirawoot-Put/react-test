@@ -10,12 +10,12 @@ export interface Test {
 
 function TestList() {
   const test1: Test = {
-    title: "Test1",
+    title: "Test 1",
     description: "Layout & Style",
-    linkTo: "/",
+    linkTo: "/layout-style",
   };
   const test2: Test = {
-    title: "Test2",
+    title: "Test 2",
     description: "Form & Table",
     linkTo: "/",
   };
@@ -23,8 +23,8 @@ function TestList() {
 
   return (
     <div className={style.list}>
-      {list.map((item) => (
-        <TestBox item={item} />
+      {list.map((item, index) => (
+        <TestBox key={index} item={item} />
       ))}
     </div>
   );

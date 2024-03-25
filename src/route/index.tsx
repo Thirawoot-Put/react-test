@@ -1,12 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Container from "../layouts/Container";
-import TestList from "../components/TestList";
+import HomePage from "../pages/HomePage";
+import LayoutStylePage from "../pages/LayoutStylePage";
+import "../translation/i18n";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Container />,
-    children: [{ path: "/", element: <TestList /> }],
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/layout-style", element: <LayoutStylePage /> },
+    ],
   },
 ]);
 

@@ -7,4 +7,13 @@
     flex-direction: column;
     justify-content: space-between;
     border-radius: 0.2rem;
+    text-decoration: none;
+}
+
+.box:active {
+    color: black;
+}
+
+.box:visited {
+    color: black;
 }
