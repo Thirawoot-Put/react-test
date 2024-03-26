@@ -1,0 +1,11 @@
+.container_normal {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.container_up_down {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1rem;
+}

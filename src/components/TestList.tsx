@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 import TestBox from "./TestBox";
 
 import style from "./TestList.module.scss";
@@ -23,8 +25,8 @@ function TestList() {
 
   return (
     <div className={style.list}>
-      {list.map((item, index) => (
-        <TestBox key={index} item={item} />
+      {list.map((item) => (
+        <TestBox key={nanoid()} item={item} />
       ))}
     </div>
   );
