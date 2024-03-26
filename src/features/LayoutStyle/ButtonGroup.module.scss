@@ -1,0 +1,78 @@
+.container {
+  margin-inline: 220px;
+}
+
+// Function button
+.triangleUp {
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 80px solid #555;
+}
+
+.triangleDown {
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-top: 80px solid #555;
+}
+
+.triangleLeft {
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-right: 80px solid #555;
+  border-bottom: 40px solid transparent;
+}
+
+.triangleRight {
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-left: 80px solid #555;
+  border-bottom: 40px solid transparent;
+}
+
+// Move button
+.square {
+  height: 100px;
+  width: 100px;
+  background-color: #555;
+}
+
+.circle {
+  height: 100px;
+  width: 100px;
+  background-color: #555;
+  border-radius: 50%;
+}
+
+.oval {
+  height: 100px;
+  width: 200px;
+  background-color: #555;
+  border-radius: 50%;
+}
+
+.trapezoid {
+  border-bottom: 80px solid #555;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  height: 0;
+  width: 200px;
+}
+
+.rectangle {
+  height: 100px;
+  width: 200px;
+  background-color: #555;
+}
+
+.parallelogram {
+  width: 200px;
+  height: 100px;
+  transform: skew(20deg);
+  background: #555;
+}

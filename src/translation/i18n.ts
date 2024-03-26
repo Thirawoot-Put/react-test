@@ -8,6 +8,8 @@ interface Translation {
   "Test 2": string;
   "Layout & Style": string;
   "Form & Table": string;
+  "Move shape": string;
+  "Move position": string;
 }
 
 const translationEn: Translation = {
@@ -17,6 +19,8 @@ const translationEn: Translation = {
   "Test 2": "Test 2",
   "Layout & Style": "Layout & Style",
   "Form & Table": "Form & Table",
+  "Move shape": "Move shape",
+  "Move position": "Move position",
 };
 
 const translationTh: Translation = {
@@ -26,6 +30,8 @@ const translationTh: Translation = {
   "Test 2": "แบบทดสอบที่ 2",
   "Layout & Style": "การจัดการหน้าเว็บ",
   "Form & Table": "การจัดการหน้าฟอร์ม",
+  "Move shape": "เลื่อนรูปแบบ",
+  "Move position": "เปลี่ยนตำแหน่ง",
 };
 
 i18n.use(initReactI18next).init({
