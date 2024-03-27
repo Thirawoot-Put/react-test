@@ -26,7 +26,7 @@ const RegisterForm: React.FC = () => {
     form.resetFields();
   };
 
-  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
+  const onChangeDate: DatePickerProps["onChange"] = (date, dateString) => {
     console.log(date, dateString);
   };
 
@@ -37,7 +37,6 @@ const RegisterForm: React.FC = () => {
   return (
     <div className={style.container}>
       <Form
-        // {...layout}
         form={form}
         name="control-hooks"
         onFinish={onFinish}
@@ -81,7 +80,7 @@ const RegisterForm: React.FC = () => {
             label="Birth date"
             rules={[{ required: true }]}
           >
-            <DatePicker onChange={onChange} />
+            <DatePicker onChange={onChangeDate} />
           </Form.Item>
           <Form.Item
             name="nationality"
