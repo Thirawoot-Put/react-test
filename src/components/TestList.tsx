@@ -19,7 +19,7 @@ function TestList() {
   const test2: Test = {
     title: "Test 2",
     description: "Form & Table",
-    linkTo: "/",
+    linkTo: "/form",
   };
   const list: Test[] = [test1, test2];
 

@@ -3,6 +3,7 @@ import Container from "../layouts/Container";
 import HomePage from "../pages/HomePage";
 import LayoutStylePage from "../pages/LayoutStylePage";
 import "../translation/i18n";
+import FormTablePage from "../pages/FormTablePage";
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/layout-style", element: <LayoutStylePage /> },
+      { path: "/form", element: <FormTablePage /> },
     ],
   },
 ]);
