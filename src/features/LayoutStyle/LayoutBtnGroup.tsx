@@ -9,9 +9,10 @@ interface Props {
   upSideDown: boolean;
   firstList: string[];
   secondList: string[];
+  onClick: (id: number) => void;
 }
 
-function LayoutBtnGroup({ upSideDown, firstList, secondList }: Props) {
+function LayoutBtnGroup({ upSideDown, firstList, secondList, onClick }: Props) {
   const className = upSideDown
     ? style.container_up_down
     : style.container_normal;
@@ -19,26 +20,26 @@ function LayoutBtnGroup({ upSideDown, firstList, secondList }: Props) {
     <div className={className}>
       <Row gutter={16} justify="center">
         <Col span={6}></Col>
-        {firstList.map((el) => (
+        {firstList.map((el, id) => (
           <Col
             key={nanoid()}
             style={{ display: "flex", justifyContent: "center" }}
             span={6}
           >
-            <Button text="">
+            <Button text="" onClick={() => onClick(id)}>
               <div className={el}></div>
             </Button>
           </Col>
         ))}
       </Row>
       <Row gutter={16} justify="center">
-        {secondList.map((el) => (
+        {secondList.map((el, id) => (
           <Col
             key={nanoid()}
             style={{ display: "flex", justifyContent: "center" }}
             span={6}
           >
-            <Button text="">
+            <Button text="" onClick={() => onClick(id)}>
               <div className={el}></div>
             </Button>
           </Col>

@@ -36,6 +36,15 @@ function ButtonGroup() {
     setUpSideDown((curr) => !curr);
   };
 
+  const handleClickRandom = (id: number) => {
+    let randomIndex = Math.floor(Math.random() * 6);
+    if (randomIndex === id) randomIndex += 1;
+    const copyArr = [...styleList];
+    const [result] = copyArr.splice(id, 1);
+    copyArr.splice(randomIndex, 0, result);
+    setStyleList(copyArr);
+  };
+
   return (
     <div className={style.container}>
       <FunctionalBtnGroup
@@ -47,6 +56,7 @@ function ButtonGroup() {
         upSideDown={upSideDown}
         firstList={firstList}
         secondList={secondList}
+        onClick={handleClickRandom}
       />
     </div>
   );
