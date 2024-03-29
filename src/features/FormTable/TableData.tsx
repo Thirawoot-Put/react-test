@@ -2,7 +2,7 @@ import { Button, Checkbox, Pagination, Table, TableColumnsType } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { useState } from "react";
 
-import data from "./mockData";
+import { useDispatch, useSelector } from "react-redux";
 
 interface DataType {
   key: React.Key;
@@ -16,6 +16,19 @@ function TableData() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(3);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
+  const { data } = useSelector((state) => (state as any).FR);
+
+  const customData: any[] = [];
+  for (let i = 0; i < data.length; i++) {
+    const copy = {
+      ...data[i],
+      name: data[i].firstName + " " + data[i].lastName,
+    };
+    delete copy.firstName;
+    delete copy.lastName;
+    customData.push(copy);
+  }
 
   const columns: TableColumnsType<DataType> = [
     {
@@ -52,8 +65,7 @@ function TableData() {
   };
 
   const onSelectAll = (e: CheckboxChangeEvent) => {
-    console.log(e);
-    const key = e.target.checked ? data.map((el) => el.key) : [];
+    const key = e.target.checked ? customData.map((el) => el.key) : [];
     setSelectedRowKeys(key);
   };
 
@@ -62,7 +74,7 @@ function TableData() {
     onChange: onSelectChange,
   };
 
-  const paginatedData = data.slice(
+  const paginatedData = customData.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
@@ -90,7 +102,7 @@ function TableData() {
           style={{ marginTop: "10px", textAlign: "center" }}
           current={currentPage}
           pageSize={pageSize}
-          total={data.length}
+          total={data?.length}
           onChange={handleChangePage}
           onShowSizeChange={handleChangePage}
         />

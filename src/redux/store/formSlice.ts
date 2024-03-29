@@ -1,12 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const applicantsData =
+  localStorage.getItem("applicantsData") != null
+    ? JSON.parse(localStorage.getItem("applicantsData")!)
+    : [];
+
 interface initialStateType {
   data: any[];
   loading: boolean;
 }
 
 const initialState: initialStateType = {
-  data: [],
+  data: applicantsData,
   loading: false,
 };
 
@@ -16,6 +21,10 @@ const formSlice = createSlice({
   reducers: {
     registerData: (state, action) => {
       state.data.push(action.payload);
+      localStorage.setItem(
+        "applicantsData",
+        JSON.stringify(state.data.map((el) => el))
+      );
     },
     editData: (state, action) => {
       state.data.splice(action.payload.id, 1, action.payload.editData);
