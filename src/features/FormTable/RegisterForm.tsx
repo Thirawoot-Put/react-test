@@ -91,28 +91,30 @@ const RegisterForm: React.FC = () => {
           </Radio.Group>
         </Form.Item>
 
-        <Form.Item
-          name="mobile"
-          label="Mobile number"
-          rules={[{ required: true }]}
-        >
-          <div style={{ display: "flex" }}>
+        <div style={{ display: "flex" }}>
+          <Form.Item
+            name="mobileCode"
+            label="Mobile number"
+            rules={[{ required: true }]}
+          >
             <Select style={{ width: 100 }}>
               <Option value="66">+66 (TH)</Option>
             </Select>
-            <div
-              style={{
-                paddingInline: "10px",
-                display: "flex",
-                alignItems: "center",
-                fontWeight: "600",
-              }}
-            >
-              -
-            </div>
-            <Input name="mobile" style={{ width: "300px" }} />
+          </Form.Item>
+          <div
+            style={{
+              paddingInline: "10px",
+              display: "flex",
+              // alignItems: "center",
+              fontWeight: "600",
+            }}
+          >
+            -
           </div>
-        </Form.Item>
+          <Form.Item name="mobile">
+            <Input name="mobile" style={{ width: "300px" }} />
+          </Form.Item>
+        </div>
 
         <Form.Item name="passport" label="Passport">
           <Input name="passport" style={{ width: "300px" }} />

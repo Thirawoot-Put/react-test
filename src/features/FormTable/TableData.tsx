@@ -10,8 +10,9 @@ import { EditOutlined } from "@ant-design/icons";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EditForm from "./EditForm";
+import { editData } from "../../redux/store/formSlice";
 
 interface DataType {
   key: React.Key;
@@ -27,26 +28,21 @@ function TableData() {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [editData, setEditData] = useState(null);
+  const [edit, setEdit] = useState(null);
 
   const { data } = useSelector((state) => (state as any).FR);
 
-  const customData: any[] = [];
-  for (let i = 0; i < data.length; i++) {
-    const copy = {
-      ...data[i],
-      name: data[i].firstName + " " + data[i].lastName,
-    };
-    delete copy.firstName;
-    delete copy.lastName;
-    customData.push(copy);
-  }
+  const dispatch = useDispatch();
 
   const columns: TableColumnsType<DataType> = [
     {
       title: "Name",
-      dataIndex: "name",
       sorter: (a, b) => a.name.localeCompare(b.name),
+      render: (record) => (
+        <>
+          {record?.firstName} {record?.lastName}
+        </>
+      ),
     },
     {
       title: "Gender",
@@ -77,7 +73,7 @@ function TableData() {
   };
 
   const onSelectAll = (e: CheckboxChangeEvent) => {
-    const key = e.target.checked ? customData.map((el) => el.key) : [];
+    const key = e.target.checked ? data.map((el: any) => el.key) : [];
     setSelectedRowKeys(key);
   };
 
@@ -86,7 +82,7 @@ function TableData() {
     onChange: onSelectChange,
   };
 
-  const paginatedData = customData.slice(
+  const paginatedData = data.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
@@ -98,7 +94,21 @@ function TableData() {
 
   const handleClickEdit = (record: any) => {
     setIsEditing(true);
-    setEditData({ ...record });
+    setEdit({ ...record });
+  };
+
+  const handleChangeEditInput = (e: React.FormEvent<HTMLInputElement>) => {
+    setEdit((prv: any) => ({
+      ...prv,
+      [e.currentTarget.name]: e.currentTarget.value,
+    }));
+  };
+
+  console.log(edit);
+
+  const handleConfirmEdit = () => {
+    dispatch(editData(edit));
+    setIsEditing(false);
   };
 
   return (
@@ -136,10 +146,10 @@ function TableData() {
           open={isEditing}
           onCancel={() => setIsEditing(false)}
           okText="Save"
-          onOk={() => setIsEditing(false)}
+          onOk={handleConfirmEdit}
           style={{ width: "900px" }}
         >
-          <EditForm />
+          <EditForm edit={edit} onChange={handleChangeEditInput} />
         </Modal>
       </>
     </>

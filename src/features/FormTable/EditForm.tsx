@@ -4,12 +4,17 @@ import { Button, DatePicker, Form, Input, Radio, Select, Space } from "antd";
 
 import style from "./EditForm.module.scss";
 import InputContainer from "./InputContainer";
-import { registerData } from "../../redux/store/formSlice";
+import { editData, registerData } from "../../redux/store/formSlice";
 import { useDispatch } from "react-redux";
 
 const { Option } = Select;
 
-const EditForm: React.FC = () => {
+interface Props {
+  edit: any;
+  onChange: (e: any) => void;
+}
+
+const EditForm: React.FC<Props> = ({ edit, onChange }) => {
   const [form] = Form.useForm();
 
   const dispatch = useDispatch();
@@ -21,10 +26,6 @@ const EditForm: React.FC = () => {
     console.log(values);
   };
 
-  const onReset = () => {
-    form.resetFields();
-  };
-
   return (
     <div className={style.container}>
       <Form
@@ -34,12 +35,19 @@ const EditForm: React.FC = () => {
         style={{ width: "100%" }}
       >
         <Form.Item name="prefix" label="Prefix" rules={[{ required: true }]}>
-          <Select placeholder="Prefix" style={{ width: 80 }}>
-            <Option value="mr">Mr</Option>
-            <Option value="mrs">Mrs</Option>
-            <Option value="miss">Miss</Option>
-            <Option value="ms">Ms</Option>
-          </Select>
+          <div>
+            <Select
+              placeholder="Prefix"
+              value={edit?.prefix}
+              onChange={onChange}
+              style={{ width: 80 }}
+            >
+              <Option value="mr">Mr</Option>
+              <Option value="mrs">Mrs</Option>
+              <Option value="miss">Miss</Option>
+              <Option value="ms">Ms</Option>
+            </Select>
+          </div>
         </Form.Item>
         <Form.Item
           name="firstName"
@@ -47,7 +55,13 @@ const EditForm: React.FC = () => {
           rules={[{ required: true }]}
           style={{ width: "310px" }}
         >
-          <Input name="firstName" />
+          <div>
+            <Input
+              name="firstName"
+              value={edit?.firstName}
+              onChange={onChange}
+            />
+          </div>
         </Form.Item>
         <Form.Item
           name="lastName"
@@ -55,7 +69,9 @@ const EditForm: React.FC = () => {
           rules={[{ required: true }]}
           style={{ width: "310px" }}
         >
-          <Input name="lastName" />
+          <div>
+            <Input name="lastName" value={edit?.lastName} onChange={onChange} />
+          </div>
         </Form.Item>
 
         <InputContainer>
@@ -64,57 +80,93 @@ const EditForm: React.FC = () => {
             label="Birth date"
             rules={[{ required: true }]}
           >
-            <DatePicker name="birthDate" />
+            <DatePicker name="birthDate" onChange={onChange} />
           </Form.Item>
           <Form.Item
             name="nationality"
             label="Nationality"
             rules={[{ required: true }]}
           >
-            <Select placeholder="Nationality">
-              <Option value="th">Thai</Option>
-            </Select>
+            <div>
+              <Select
+                placeholder="Nationality"
+                value={edit?.nationality}
+                onChange={onChange}
+              >
+                <Option value="th">Thai</Option>
+              </Select>
+            </div>
           </Form.Item>
         </InputContainer>
 
         <Form.Item name="idNumber" label="ID Number">
-          <Input name="idNumber" style={{ width: "350px" }} />
-        </Form.Item>
-
-        <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
-          <Radio.Group>
-            <Radio value="male">Male</Radio>
-            <Radio value="female">Female</Radio>
-            <Radio value="lgbtq">LGBTQ+</Radio>
-            <Radio value="unspecified">Unspecified</Radio>
-          </Radio.Group>
-        </Form.Item>
-
-        <Form.Item
-          name="mobile"
-          label="Mobile number"
-          rules={[{ required: true }]}
-        >
-          <div style={{ display: "flex" }}>
-            <Select style={{ width: 70 }}>
-              <Option value="66">+66 (TH)</Option>
-            </Select>
-            <div
-              style={{
-                paddingInline: "10px",
-                display: "flex",
-                alignItems: "center",
-                fontWeight: "600",
-              }}
-            >
-              -
-            </div>
-            <Input name="mobile" style={{ width: "200px" }} />
+          <div>
+            <Input
+              name="idNumber"
+              value={edit?.idNumber}
+              onChange={onChange}
+              style={{ width: "350px" }}
+            />
           </div>
         </Form.Item>
 
+        <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
+          <div>
+            <Radio.Group value={edit?.gender} onChange={onChange}>
+              <Radio value="male">Male</Radio>
+              <Radio value="female">Female</Radio>
+              <Radio value="lgbtq">LGBTQ+</Radio>
+              <Radio value="unspecified">Unspecified</Radio>
+            </Radio.Group>
+          </div>
+        </Form.Item>
+
+        <div style={{ display: "flex" }}>
+          <Form.Item
+            name="mobileCode"
+            label="Mobile number"
+            rules={[{ required: true }]}
+          >
+            <div>
+              <Select
+                value={edit?.mobileCode}
+                onChange={onChange}
+                style={{ width: 60 }}
+              >
+                <Option value="66">+66 (TH)</Option>
+              </Select>
+            </div>
+          </Form.Item>
+          <div
+            style={{
+              paddingInline: "10px",
+              display: "flex",
+              fontWeight: "600",
+            }}
+          >
+            -
+          </div>
+          <Form.Item name="mobile" rules={[{ required: true }]}>
+            <div>
+              <Input
+                name="mobile"
+                value={edit?.mobile}
+                onChange={onChange}
+                style={{ width: "250px" }}
+              />
+            </div>
+          </Form.Item>
+        </div>
+
         <Form.Item name="passport" label="Passport">
-          <Input name="passport" style={{ width: "300px" }} />
+          <div>
+            <Input
+              name="passport"
+              value={edit?.passport}
+              onChange={onChange}
+              style={{ width: "300px" }}
+            />
+          </div>
         </Form.Item>
 
         <InputContainer>
@@ -123,7 +175,14 @@ const EditForm: React.FC = () => {
             label="Expected salary"
             rules={[{ required: true }]}
           >
-            <Input name="expectedSalary" style={{ width: "250px" }} />
+            <div>
+              <Input
+                name="expectedSalary"
+                value={edit?.expectedSalary}
+                onChange={onChange}
+                style={{ width: "250px" }}
+              />
+            </div>
           </Form.Item>
         </InputContainer>
       </Form>

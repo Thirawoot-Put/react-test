@@ -29,7 +29,17 @@ const formSlice = createSlice({
       );
     },
     editData: (state, action) => {
-      state.data.splice(action.payload.id, 1, action.payload.editData);
+      const foundIndex = state.data.findIndex(
+        (data) => data.key == action.payload.key
+      );
+      console.log(foundIndex);
+      if (foundIndex !== -1) {
+        state.data.splice(foundIndex, 1, action.payload);
+        localStorage.setItem(
+          "applicantsData",
+          JSON.stringify(state.data.map((el) => el))
+        );
+      }
     },
     deleteData: (state, action) => {
       const foundIndex = state.data.findIndex((el) => el.id === action.payload);
