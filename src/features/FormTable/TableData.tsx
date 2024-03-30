@@ -1,8 +1,17 @@
-import { Button, Checkbox, Pagination, Table, TableColumnsType } from "antd";
+import {
+  Button,
+  Checkbox,
+  Modal,
+  Pagination,
+  Table,
+  TableColumnsType,
+} from "antd";
+import { EditOutlined } from "@ant-design/icons";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import EditForm from "./EditForm";
 
 interface DataType {
   key: React.Key;
@@ -16,6 +25,9 @@ function TableData() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(3);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [editData, setEditData] = useState(null);
 
   const { data } = useSelector((state) => (state as any).FR);
 
@@ -52,9 +64,9 @@ function TableData() {
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
-      dataIndex: "key",
+      title: "Edit",
       render: (record) => (
-        <Button onClick={() => console.log(record)}>Edit</Button>
+        <EditOutlined onClick={() => handleClickEdit(record)} />
       ),
     },
   ];
@@ -82,6 +94,11 @@ function TableData() {
   const handleChangePage = (page: number, pageSize: number) => {
     setCurrentPage(page);
     setPageSize(pageSize);
+  };
+
+  const handleClickEdit = (record: any) => {
+    setIsEditing(true);
+    setEditData({ ...record });
   };
 
   return (
@@ -114,6 +131,16 @@ function TableData() {
           pagination={false}
           rowSelection={rowSelection}
         />
+        <Modal
+          title="Edit"
+          open={isEditing}
+          onCancel={() => setIsEditing(false)}
+          okText="Save"
+          onOk={() => setIsEditing(false)}
+          style={{ width: "900px" }}
+        >
+          <EditForm />
+        </Modal>
       </>
     </>
   );

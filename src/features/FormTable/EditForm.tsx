@@ -2,22 +2,23 @@ import React from "react";
 import { nanoid } from "nanoid";
 import { Button, DatePicker, Form, Input, Radio, Select, Space } from "antd";
 
-import style from "./RegisterForm.module.scss";
+import style from "./EditForm.module.scss";
 import InputContainer from "./InputContainer";
 import { registerData } from "../../redux/store/formSlice";
 import { useDispatch } from "react-redux";
 
 const { Option } = Select;
 
-const RegisterForm: React.FC = () => {
+const EditForm: React.FC = () => {
   const [form] = Form.useForm();
 
   const dispatch = useDispatch();
 
   const onFinish = (values: any) => {
-    const data = { ...values, key: nanoid() };
-    dispatch(registerData(data));
-    form.resetFields();
+    // const data = { ...values, key: nanoid() };
+    // dispatch(registerData(data));
+    // form.resetFields();
+    console.log(values);
   };
 
   const onReset = () => {
@@ -28,36 +29,34 @@ const RegisterForm: React.FC = () => {
     <div className={style.container}>
       <Form
         form={form}
-        name="register-form"
+        name="edit-form"
         onFinish={onFinish}
         style={{ width: "100%" }}
       >
-        <InputContainer>
-          <Form.Item name="prefix" label="Prefix" rules={[{ required: true }]}>
-            <Select placeholder="Prefix" style={{ width: 80 }}>
-              <Option value="mr">Mr</Option>
-              <Option value="mrs">Mrs</Option>
-              <Option value="miss">Miss</Option>
-              <Option value="ms">Ms</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item
-            name="firstName"
-            label="First name"
-            rules={[{ required: true }]}
-            style={{ width: "310px" }}
-          >
-            <Input name="firstName" />
-          </Form.Item>
-          <Form.Item
-            name="lastName"
-            label="Last name"
-            rules={[{ required: true }]}
-            style={{ width: "310px" }}
-          >
-            <Input name="lastName" />
-          </Form.Item>
-        </InputContainer>
+        <Form.Item name="prefix" label="Prefix" rules={[{ required: true }]}>
+          <Select placeholder="Prefix" style={{ width: 80 }}>
+            <Option value="mr">Mr</Option>
+            <Option value="mrs">Mrs</Option>
+            <Option value="miss">Miss</Option>
+            <Option value="ms">Ms</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item
+          name="firstName"
+          label="First name"
+          rules={[{ required: true }]}
+          style={{ width: "310px" }}
+        >
+          <Input name="firstName" />
+        </Form.Item>
+        <Form.Item
+          name="lastName"
+          label="Last name"
+          rules={[{ required: true }]}
+          style={{ width: "310px" }}
+        >
+          <Input name="lastName" />
+        </Form.Item>
 
         <InputContainer>
           <Form.Item
@@ -79,7 +78,7 @@ const RegisterForm: React.FC = () => {
         </InputContainer>
 
         <Form.Item name="idNumber" label="ID Number">
-          <Input name="idNumber" style={{ width: "400px" }} />
+          <Input name="idNumber" style={{ width: "350px" }} />
         </Form.Item>
 
         <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
@@ -97,7 +96,7 @@ const RegisterForm: React.FC = () => {
           rules={[{ required: true }]}
         >
           <div style={{ display: "flex" }}>
-            <Select style={{ width: 100 }}>
+            <Select style={{ width: 70 }}>
               <Option value="66">+66 (TH)</Option>
             </Select>
             <div
@@ -110,7 +109,7 @@ const RegisterForm: React.FC = () => {
             >
               -
             </div>
-            <Input name="mobile" style={{ width: "300px" }} />
+            <Input name="mobile" style={{ width: "200px" }} />
           </div>
         </Form.Item>
 
@@ -126,22 +125,10 @@ const RegisterForm: React.FC = () => {
           >
             <Input name="expectedSalary" style={{ width: "250px" }} />
           </Form.Item>
-          <Space style={{ alignItems: "start" }}>
-            <Button
-              htmlType="button"
-              onClick={onReset}
-              style={{ marginLeft: "100px" }}
-            >
-              Clear
-            </Button>
-            <Button htmlType="submit" style={{ marginLeft: "50px" }}>
-              Send
-            </Button>
-          </Space>
         </InputContainer>
       </Form>
     </div>
   );
 };
 
-export default RegisterForm;
+export default EditForm;

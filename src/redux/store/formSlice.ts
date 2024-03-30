@@ -20,6 +20,8 @@ const formSlice = createSlice({
   initialState: initialState,
   reducers: {
     registerData: (state, action) => {
+      const dateString = new Date(action.payload.birthDate).toDateString();
+      action.payload.birthDate = dateString;
       state.data.push(action.payload);
       localStorage.setItem(
         "applicantsData",
