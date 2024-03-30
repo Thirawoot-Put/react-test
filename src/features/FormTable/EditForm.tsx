@@ -1,11 +1,8 @@
 import React from "react";
-import { nanoid } from "nanoid";
-import { Button, DatePicker, Form, Input, Radio, Select, Space } from "antd";
+import { DatePicker, Form, Input, Radio, Select } from "antd";
 
 import style from "./EditForm.module.scss";
 import InputContainer from "./InputContainer";
-import { editData, registerData } from "../../redux/store/formSlice";
-import { useDispatch } from "react-redux";
 
 const { Option } = Select;
 
@@ -17,23 +14,9 @@ interface Props {
 const EditForm: React.FC<Props> = ({ edit, onChange }) => {
   const [form] = Form.useForm();
 
-  const dispatch = useDispatch();
-
-  const onFinish = (values: any) => {
-    // const data = { ...values, key: nanoid() };
-    // dispatch(registerData(data));
-    // form.resetFields();
-    console.log(values);
-  };
-
   return (
     <div className={style.container}>
-      <Form
-        form={form}
-        name="edit-form"
-        onFinish={onFinish}
-        style={{ width: "100%" }}
-      >
+      <Form form={form} name="edit-form" style={{ width: "100%" }}>
         <Form.Item name="prefix" label="Prefix" rules={[{ required: true }]}>
           <div>
             <Select

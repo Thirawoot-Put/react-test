@@ -12,11 +12,11 @@ import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import EditForm from "./EditForm";
-import { editData } from "../../redux/store/formSlice";
+import { deleteData, editData } from "../../redux/store/formSlice";
 
 interface DataType {
   key: React.Key;
-  name: string;
+  firstName: string;
   gender: string;
   mobile: string;
   nationality: string;
@@ -37,7 +37,7 @@ function TableData() {
   const columns: TableColumnsType<DataType> = [
     {
       title: "Name",
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a.firstName.localeCompare(b.firstName),
       render: (record) => (
         <>
           {record?.firstName} {record?.lastName}
@@ -47,17 +47,17 @@ function TableData() {
     {
       title: "Gender",
       dataIndex: "gender",
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a.gender.localeCompare(b.gender),
     },
     {
       title: "Mobile number",
       dataIndex: "mobile",
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a.mobile.localeCompare(b.mobile),
     },
     {
       title: "Nationality",
       dataIndex: "nationality",
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a.nationality.localeCompare(b.nationality),
     },
     {
       title: "Edit",
@@ -68,7 +68,6 @@ function TableData() {
   ];
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log("selectedRowKeys changed: ", newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -104,11 +103,17 @@ function TableData() {
     }));
   };
 
-  console.log(edit);
-
   const handleConfirmEdit = () => {
     dispatch(editData(edit));
     setIsEditing(false);
+  };
+
+  const handleDeleteData = () => {
+    for (let i = 0; i < selectedRowKeys.length; i++) {
+      console.log(selectedRowKeys[i]);
+      dispatch(deleteData(selectedRowKeys[i]));
+    }
+    setSelectedRowKeys([]);
   };
 
   return (
@@ -123,7 +128,7 @@ function TableData() {
       >
         <div>
           <Checkbox onChange={onSelectAll}>Select all</Checkbox>
-          <Button>Delete data</Button>
+          <Button onClick={handleDeleteData}>Delete data</Button>
         </div>
         <Pagination
           style={{ marginTop: "10px", textAlign: "center" }}
@@ -131,7 +136,7 @@ function TableData() {
           pageSize={pageSize}
           total={data?.length}
           onChange={handleChangePage}
-          onShowSizeChange={handleChangePage}
+          // onShowSizeChange={handleChangePage}
         />
       </div>
       <>

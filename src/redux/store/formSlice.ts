@@ -32,7 +32,6 @@ const formSlice = createSlice({
       const foundIndex = state.data.findIndex(
         (data) => data.key == action.payload.key
       );
-      console.log(foundIndex);
       if (foundIndex !== -1) {
         state.data.splice(foundIndex, 1, action.payload);
         localStorage.setItem(
@@ -42,8 +41,16 @@ const formSlice = createSlice({
       }
     },
     deleteData: (state, action) => {
-      const foundIndex = state.data.findIndex((el) => el.id === action.payload);
-      if (foundIndex !== -1) state.data.splice(foundIndex, 1);
+      const foundIndex = state.data.findIndex(
+        (data) => data.key === action.payload
+      );
+      if (foundIndex !== -1) {
+        state.data.splice(foundIndex, 1);
+        localStorage.setItem(
+          "applicantsData",
+          JSON.stringify(state.data.map((el) => el))
+        );
+      }
     },
   },
 });
