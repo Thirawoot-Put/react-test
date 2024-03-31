@@ -14,12 +14,12 @@ function TestList() {
   const test1: Test = {
     title: "Test 1",
     description: "Layout & Style",
-    linkTo: "/layout-style",
+    linkTo: "/react-test/layout-style",
   };
   const test2: Test = {
     title: "Test 2",
     description: "Form & Table",
-    linkTo: "/form",
+    linkTo: "/react-test/form",
   };
   const list: Test[] = [test1, test2];
 
