@@ -2,7 +2,7 @@
   "name": "react-test",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://thirawoot-put.github.io/SPA_layout-form/",
+  "homepage": "https://thirawoot-put.github.io/SPA_layout-form",
   "type": "module",
   "scripts": {
     "dev": "vite",
