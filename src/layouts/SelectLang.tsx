@@ -11,7 +11,7 @@ function SelectLang() {
   return (
     <div className={style.container}>
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/react-test/")}
         style={{
           paddingInline: "5px",
           background: "white",
