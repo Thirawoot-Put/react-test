@@ -10,9 +10,9 @@ const router = createBrowserRouter([
     path: "/",
     element: <Container />,
     children: [
-      { path: "/react-test/", element: <HomePage /> },
-      { path: "/react-test/layout-style", element: <LayoutStylePage /> },
-      { path: "/react-test/form", element: <FormTablePage /> },
+      { path: "/", element: <HomePage /> },
+      { path: "/layout-style", element: <LayoutStylePage /> },
+      { path: "/form", element: <FormTablePage /> },
     ],
   },
 ]);
