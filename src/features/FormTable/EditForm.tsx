@@ -3,6 +3,7 @@ import { DatePicker, Form, Input, Radio, Select } from "antd";
 
 import style from "./EditForm.module.scss";
 import InputContainer from "./InputContainer";
+import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
 
@@ -12,29 +13,34 @@ interface Props {
 }
 
 const EditForm: React.FC<Props> = ({ edit, onChange }) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
 
   return (
     <div className={style.container}>
       <Form form={form} name="edit-form" style={{ width: "100%" }}>
-        <Form.Item name="prefix" label="Prefix" rules={[{ required: true }]}>
+        <Form.Item
+          name="prefix"
+          label={t("Prefix")}
+          rules={[{ required: true }]}
+        >
           <div>
             <Select
-              placeholder="Prefix"
+              placeholder={t("Prefix")}
               value={edit?.prefix}
               onChange={onChange}
               style={{ width: 80 }}
             >
-              <Option value="mr">Mr</Option>
-              <Option value="mrs">Mrs</Option>
-              <Option value="miss">Miss</Option>
-              <Option value="ms">Ms</Option>
+              <Option value="mr">{t("Mr")}</Option>
+              <Option value="mrs">{t("Mrs")}</Option>
+              <Option value="miss">{t("Miss")}</Option>
+              <Option value="ms">{t("Ms")}</Option>
             </Select>
           </div>
         </Form.Item>
         <Form.Item
           name="firstName"
-          label="First name"
+          label={t("First name")}
           rules={[{ required: true }]}
           style={{ width: "310px" }}
         >
@@ -48,7 +54,7 @@ const EditForm: React.FC<Props> = ({ edit, onChange }) => {
         </Form.Item>
         <Form.Item
           name="lastName"
-          label="Last name"
+          label={t("Last name")}
           rules={[{ required: true }]}
           style={{ width: "310px" }}
         >
@@ -60,46 +66,50 @@ const EditForm: React.FC<Props> = ({ edit, onChange }) => {
         <InputContainer>
           <Form.Item
             name="birthDate"
-            label="Birth date"
+            label={t("Birth date")}
             rules={[{ required: true }]}
           >
             <DatePicker name="birthDate" onChange={onChange} />
           </Form.Item>
           <Form.Item
             name="nationality"
-            label="Nationality"
+            label={t("Nationality")}
             rules={[{ required: true }]}
           >
             <div>
               <Select
-                placeholder="Nationality"
+                placeholder={t("Nationality")}
                 value={edit?.nationality}
                 onChange={onChange}
               >
-                <Option value="th">Thai</Option>
+                <Option value="th">{t("Thai")}</Option>
               </Select>
             </div>
           </Form.Item>
         </InputContainer>
 
-        <Form.Item name="idNumber" label="ID Number">
+        <Form.Item name="idNumber" label={t("ID Number")}>
           <div>
             <Input
               name="idNumber"
               value={edit?.idNumber}
               onChange={onChange}
-              style={{ width: "350px" }}
+              style={{ width: "250px" }}
             />
           </div>
         </Form.Item>
 
-        <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
+        <Form.Item
+          name="gender"
+          label={t("Gender")}
+          rules={[{ required: true }]}
+        >
           <div>
             <Radio.Group value={edit?.gender} onChange={onChange}>
-              <Radio value="male">Male</Radio>
-              <Radio value="female">Female</Radio>
-              <Radio value="lgbtq">LGBTQ+</Radio>
-              <Radio value="unspecified">Unspecified</Radio>
+              <Radio value="male">{t("Male")}</Radio>
+              <Radio value="female">{t("Female")}</Radio>
+              <Radio value="lgbtq">{t("LGBTQ+")}</Radio>
+              <Radio value="unspecified">{t("Unspecified")}</Radio>
             </Radio.Group>
           </div>
         </Form.Item>
@@ -107,7 +117,7 @@ const EditForm: React.FC<Props> = ({ edit, onChange }) => {
         <div style={{ display: "flex" }}>
           <Form.Item
             name="mobileCode"
-            label="Mobile number"
+            label={t("Mobile number")}
             rules={[{ required: true }]}
           >
             <div>
@@ -141,7 +151,7 @@ const EditForm: React.FC<Props> = ({ edit, onChange }) => {
           </Form.Item>
         </div>
 
-        <Form.Item name="passport" label="Passport">
+        <Form.Item name="passport" label={t("Passport")}>
           <div>
             <Input
               name="passport"
@@ -155,7 +165,7 @@ const EditForm: React.FC<Props> = ({ edit, onChange }) => {
         <InputContainer>
           <Form.Item
             name="expectedSalary"
-            label="Expected salary"
+            label={t("Expected salary")}
             rules={[{ required: true }]}
           >
             <div>

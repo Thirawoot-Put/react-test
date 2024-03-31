@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import EditForm from "./EditForm";
 import { deleteData, editData } from "../../redux/store/formSlice";
+import { useTranslation } from "react-i18next";
 
 interface DataType {
   key: React.Key;
@@ -16,6 +17,7 @@ interface DataType {
 }
 
 function TableData() {
+  const { t } = useTranslation();
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -27,7 +29,7 @@ function TableData() {
 
   const columns: TableColumnsType<DataType> = [
     {
-      title: "Name",
+      title: `${t("Name")}`,
       sorter: (a, b) => a.firstName.localeCompare(b.firstName),
       render: (record) => (
         <>
@@ -36,22 +38,22 @@ function TableData() {
       ),
     },
     {
-      title: "Gender",
+      title: `${t("Gender")}`,
       dataIndex: "gender",
       sorter: (a, b) => a.gender.localeCompare(b.gender),
     },
     {
-      title: "Mobile number",
+      title: `${t("Mobile number")}`,
       dataIndex: "mobile",
       sorter: (a, b) => a.mobile.localeCompare(b.mobile),
     },
     {
-      title: "Nationality",
+      title: `${t("Nationality")}`,
       dataIndex: "nationality",
       sorter: (a, b) => a.nationality.localeCompare(b.nationality),
     },
     {
-      title: "Edit",
+      title: `${t("Edit")}`,
       render: (record) => (
         <EditOutlined onClick={() => handleClickEdit(record)} />
       ),
@@ -119,10 +121,11 @@ function TableData() {
           rowSelection={rowSelection}
         />
         <Modal
-          title="Edit"
+          title={t("Edit")}
           open={isEditing}
           onCancel={() => setIsEditing(false)}
-          okText="Save"
+          cancelText={t("Cancel")}
+          okText={t("Save")}
           onOk={handleConfirmEdit}
           style={{ width: "900px" }}
         >

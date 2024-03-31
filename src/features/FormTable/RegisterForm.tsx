@@ -6,10 +6,13 @@ import style from "./RegisterForm.module.scss";
 import InputContainer from "./InputContainer";
 import { registerData } from "../../redux/store/formSlice";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
 
 const RegisterForm: React.FC = () => {
+  const { t } = useTranslation();
+
   const [form] = Form.useForm();
 
   const dispatch = useDispatch();
@@ -33,17 +36,21 @@ const RegisterForm: React.FC = () => {
         style={{ width: "100%" }}
       >
         <InputContainer>
-          <Form.Item name="prefix" label="Prefix" rules={[{ required: true }]}>
-            <Select placeholder="Prefix" style={{ width: 80 }}>
-              <Option value="mr">Mr</Option>
-              <Option value="mrs">Mrs</Option>
-              <Option value="miss">Miss</Option>
-              <Option value="ms">Ms</Option>
+          <Form.Item
+            name="prefix"
+            label={t("Prefix")}
+            rules={[{ required: true }]}
+          >
+            <Select placeholder={t("Prefix")} style={{ width: 80 }}>
+              <Option value="mr">{t("Mr")}</Option>
+              <Option value="mrs">{t("Mrs")}</Option>
+              <Option value="miss">{t("Miss")}</Option>
+              <Option value="ms">{t("Ms")}</Option>
             </Select>
           </Form.Item>
           <Form.Item
             name="firstName"
-            label="First name"
+            label={t("First name")}
             rules={[{ required: true }]}
             style={{ width: "310px" }}
           >
@@ -51,7 +58,7 @@ const RegisterForm: React.FC = () => {
           </Form.Item>
           <Form.Item
             name="lastName"
-            label="Last name"
+            label={t("Last name")}
             rules={[{ required: true }]}
             style={{ width: "310px" }}
           >
@@ -62,39 +69,43 @@ const RegisterForm: React.FC = () => {
         <InputContainer>
           <Form.Item
             name="birthDate"
-            label="Birth date"
+            label={t("Birth date")}
             rules={[{ required: true }]}
           >
             <DatePicker name="birthDate" />
           </Form.Item>
           <Form.Item
             name="nationality"
-            label="Nationality"
+            label={t("Nationality")}
             rules={[{ required: true }]}
           >
-            <Select placeholder="Nationality">
-              <Option value="th">Thai</Option>
+            <Select placeholder={t("Nationality")}>
+              <Option value="th">{t("Thai")}</Option>
             </Select>
           </Form.Item>
         </InputContainer>
 
-        <Form.Item name="idNumber" label="ID Number">
+        <Form.Item name="idNumber" label={t("ID Number")}>
           <Input name="idNumber" style={{ width: "400px" }} />
         </Form.Item>
 
-        <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
+        <Form.Item
+          name="gender"
+          label={t("Gender")}
+          rules={[{ required: true }]}
+        >
           <Radio.Group>
-            <Radio value="male">Male</Radio>
-            <Radio value="female">Female</Radio>
-            <Radio value="lgbtq">LGBTQ+</Radio>
-            <Radio value="unspecified">Unspecified</Radio>
+            <Radio value="male">{t("Male")}</Radio>
+            <Radio value="female">{t("Female")}</Radio>
+            <Radio value="lgbtq">{t("LGBTQ+")}</Radio>
+            <Radio value="unspecified">{t("Unspecified")}</Radio>
           </Radio.Group>
         </Form.Item>
 
         <div style={{ display: "flex" }}>
           <Form.Item
             name="mobileCode"
-            label="Mobile number"
+            label={t("Mobile number")}
             rules={[{ required: true }]}
           >
             <Select style={{ width: 100 }}>
@@ -105,7 +116,6 @@ const RegisterForm: React.FC = () => {
             style={{
               paddingInline: "10px",
               display: "flex",
-              // alignItems: "center",
               fontWeight: "600",
             }}
           >
@@ -116,14 +126,14 @@ const RegisterForm: React.FC = () => {
           </Form.Item>
         </div>
 
-        <Form.Item name="passport" label="Passport">
+        <Form.Item name="passport" label={t("Passport")}>
           <Input name="passport" style={{ width: "300px" }} />
         </Form.Item>
 
         <InputContainer>
           <Form.Item
             name="expectedSalary"
-            label="Expected salary"
+            label={t("Expected salary")}
             rules={[{ required: true }]}
           >
             <Input name="expectedSalary" style={{ width: "250px" }} />
@@ -134,10 +144,10 @@ const RegisterForm: React.FC = () => {
               onClick={onReset}
               style={{ marginLeft: "100px" }}
             >
-              Clear
+              {t("Clear")}
             </Button>
             <Button htmlType="submit" style={{ marginLeft: "50px" }}>
-              Send
+              {t("Send")}
             </Button>
           </Space>
         </InputContainer>

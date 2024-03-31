@@ -1,5 +1,7 @@
-.select {
-    position: fixed;
-    right: 0;
-    padding: 0.3rem;
+.container {
+  position: fixed;
+  right: 0;
+  padding: 0.3rem;
+  display: flex;
+  gap: 5px;
 }
