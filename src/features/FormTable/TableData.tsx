@@ -1,11 +1,4 @@
-import {
-  Button,
-  Checkbox,
-  Modal,
-  Pagination,
-  Table,
-  TableColumnsType,
-} from "antd";
+import { Button, Checkbox, Modal, Table, TableColumnsType } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { useState } from "react";
@@ -23,8 +16,6 @@ interface DataType {
 }
 
 function TableData() {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(3);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -81,16 +72,6 @@ function TableData() {
     onChange: onSelectChange,
   };
 
-  const paginatedData = data.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize
-  );
-
-  const handleChangePage = (page: number, pageSize: number) => {
-    setCurrentPage(page);
-    setPageSize(pageSize);
-  };
-
   const handleClickEdit = (record: any) => {
     setIsEditing(true);
     setEdit({ ...record });
@@ -123,27 +104,18 @@ function TableData() {
           paddingBottom: "5px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
         }}
       >
-        <div>
-          <Checkbox onChange={onSelectAll}>Select all</Checkbox>
-          <Button onClick={handleDeleteData}>Delete data</Button>
-        </div>
-        <Pagination
-          style={{ marginTop: "10px", textAlign: "center" }}
-          current={currentPage}
-          pageSize={pageSize}
-          total={data?.length}
-          onChange={handleChangePage}
-          // onShowSizeChange={handleChangePage}
-        />
+        <Checkbox onChange={onSelectAll}>Select all</Checkbox>
+        <Button onClick={handleDeleteData}>Delete data</Button>
       </div>
       <>
         <Table
           columns={columns}
-          dataSource={paginatedData}
-          pagination={false}
+          dataSource={data}
+          pagination={{
+            pageSize: 3,
+          }}
           rowSelection={rowSelection}
         />
         <Modal
